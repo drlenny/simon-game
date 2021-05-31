@@ -2,12 +2,14 @@ const express = require("express");
 const app = express();
 var path = require('path');
 
-app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, "public")));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
+app.use(express.json())
+
 
 app.get('/', function(req, res){
-    res.render('index')
+    res.sendFile(__dirname + '/index.html')
 })
 
 let port = process.env.PORT;
